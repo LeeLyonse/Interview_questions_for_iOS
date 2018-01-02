@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML><html><head>
+<style id="wiz_custom_css">html, body {font-size: 12pt;}body {font-family: Helvetica, "Hiragino Sans GB", "微软雅黑", "Microsoft YaHei UI", SimSun, SimHei, arial, sans-serif;line-height: 1.6;margin: 0 auto;padding: 20px 16px;padding: 1.25rem 1rem;}h1, h2, h3, h4, h5, h6 {margin:20px 0 10px;margin:1.25rem 0 0.625rem;padding: 0;font-weight: bold;}h1 {font-size:20pt;font-size:1.67rem;}h2 {font-size:18pt;font-size:1.5rem;}h3 {font-size:15pt;font-size:1.25rem;}h4 {font-size:14pt;font-size:1.17rem;}h5 {font-size:12pt;font-size:1rem;}h6 {font-size:12pt;font-size:1rem;color: #777777;margin: 1rem 0;}div, p, ul, ol, dl, li {margin:0;}blockquote, table, pre, code {margin:8px 0;}ul, ol {padding-left:32px;padding-left:2rem;}ol.wiz-list-level1 > li {list-style-type:decimal;}ol.wiz-list-level2 > li {list-style-type:lower-latin;}ol.wiz-list-level3 > li {list-style-type:lower-roman;}blockquote {padding:0 12px;padding:0 0.75rem;}blockquote > :first-child {margin-top:0;}blockquote > :last-child {margin-bottom:0;}img {border:0;max-width:100%;height:auto !important;margin:2px 0;}table {border-collapse:collapse;border:1px solid #bbbbbb;}td, th {padding:4px 8px;border-collapse:collapse;border:1px solid #bbbbbb;min-height:28px;word-break:break-all;box-sizing: border-box;}.wiz-hide {display:none !important;}
+
+
+@media only screen and (-webkit-max-device-width: 1024px), only screen and (-o-max-device-width: 1024px), only screen and (max-device-width: 1024px), only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (-o-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3) {
+    html, body {
+        font-size: 17px;
+    }
+
+    body {
+        line-height: 1.7;
+        padding: 0.75rem 0.9375rem;
+        color: #353c47;
+    }
+
+    h1 {
+        font-size: 2.125rem;
+    }
+
+    h2 {
+        font-size: 1.875rem;
+    }
+
+    h3 {
+        font-size: 1.625rem;
+    }
+
+    h4 {
+        font-size: 1.375rem;
+    }
+
+    h5 {
+        font-size: 1.125rem;
+    }
+
+    h6 {
+        color: inherit;
+    }
+
+    ul, ol {
+        padding-left: 2.5rem;
+    }
+
+    blockquote {
+        padding: 0 0.9375rem;
+    }
+}
+
+html, body {
+    font-family:Helvetica Neue;
+    font-size:15px;
+    background-color:#FFFFFF;
+}</style></head>
+<body class="" ><div>MVC是一种架构设计模型，它分成Model，View，Controller三层</div><div>Model 代表业务模型层，用于表示数据及业务逻辑操作</div><div>View 代表视图层，用于表示UI元素及行为动作</div><div>Controller 代表控制层，用于协调视图层和模型层的通信调度。</div><div><br></div><div>扩展：传统的MVC模型中，View响应操作并转发给Controller，然后Controller调用Model，Model处理逻辑然后更新View</div><div>传统的MVC中View和Model存在耦合不利于开发。而Web开发中是基于请求响应式的MVC模型，由服务器端充当Controller和Model层，View层由前端充当，故Web开发中的MVC中View和Model不存在耦合。iOS开发中官方建议的MVC通信方式也禁止View和Model层进行通信。所以MVC可以基本认为Controller是View和Model直接的桥梁或者胶水代码区。</div><div><br></div><div>MVC最大的问题就是Controller难以维护和测试，所以衍生除了MVP，MVP来源于微软</div><div>主要目的是为了解决MVC中Controller的问题而引入了Presenter。</div><div>Presenter 代表分发层，用于处理事件的响应分发。</div><div>和Controller十分类似，区别是在MVP中Controller是视图层的一部分只负责视图逻辑，业务逻辑的控制全部移交给Presenter。</div><div>再通过提供响应接口来反馈业务处理结果给Controller，由Controller来更新视图。</div><div>这样就把Controller进行了瘦身，针对响应操作的测试可以直接用于Presenter，对于视图控制的测试可以直接用于Controller。</div><div>使UI测试变得可行，同时逻辑更加清晰。</div><div>但是MVP也有弊端就是每个页面需要独立的Presenter，增加工作量，随着UI变得复杂，接口也将更加复杂。</div><div><br></div><div>MVVM将Controller替换成了ViewModel，同样是为了解决MVC的问题。</div><div>viewModel代表视图-模型层，用于处理视图的控制逻辑，类似于Controller。</div><div>区别是Controller更多的复杂视图之间的关系控制，ViewModel负责视图内部的关系和逻辑处理。</div><div>并且一般会同时数据绑定方式来更新视图和模型，并且使操作流程集中。</div><div>但是MVVM也有问题，如果使用不当会使代码冗长、嵌套过多、内存泄漏，并且会引入过多的框架，bug难以调试等问题。</div><div><br></div><div>今天看了很多博客，他们对MVVM都提出了自己的看法和理解，基本主调是MVC的问题通过合理的划分是可以解决的，MVVM的思想可以借鉴，但是数据绑定会使事情变得复杂。在我看来数据绑定确实负责，通过合理的层级划分完全可以解决MVC的问题不必采用MVVM。</div><div>1.将视图无关逻辑，统统划归Model或者Utils，Controller只负责协调视图相互关系和请求分发。</div><div>2.Model层增加各类业务逻辑的Manager和Service，Service提供基础功能，Manager组合功能形成策略。</div><div>3.Service进行高级封装，隐藏底层实现的特定依赖，比如网络请求，持久化。</div><div>4.特定业务相关视图可以和数据模型耦合，可复用或者业务无关视图不可与具体数据模型耦合。</div></body></html>
